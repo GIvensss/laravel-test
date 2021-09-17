@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class User extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function(Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('games_id')->default(1);
+            $table->string('name', 255)->nullable(false)->unique();
+            $table->string('password', 255)->nullable(false)->unique();
+            $table->unsignedBigInteger('games_id')->nullable(true);
             $table->foreign('games_id')->references('id')->on('games');
+            $table->string('remember_token', 255)->nullable(true);
             $table->timestamps();
         });
     }

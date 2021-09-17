@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Games extends Model
 {
     use HasFactory;
-    public function user()
+
+    protected $table = 'games';
+    protected int $id;
+    protected string $game;
+
+    public function users()
     {
         return $this->hasMany('App\Models\User');
     }
